@@ -1,27 +1,31 @@
-import { View, Text, TouchableOpacity } from 'react-native'
-
-import React from 'react'
+import { Text, TouchableOpacity } from 'react-native'
 
 const Button = ({
-	children,
 	className,
+	children,
+	onPress,
 	textClassName,
 	...props
 }: {
-	children: React.ReactNode
 	className?: string
+	children?: React.ReactNode
+	onPress?: () => void
 	textClassName?: string
+	[key: string]: any
 }) => {
 	return (
 		<TouchableOpacity
+			className={`px-4 py-2 rounded-lg active:opacity-80 ${className}`}
+			onPress={onPress}
 			{...props}
-			className={`bg-primary-100 py-3 px-6 rounded-lg ${className}`}
 		>
-			<Text className={`text-text-100 font-bold`}>{children}</Text>
+			<Text
+				className={`text-text-100 text-center font-medium ${textClassName}`}
+			>
+				{children}
+			</Text>
 		</TouchableOpacity>
 	)
 }
-
-Button.displayName = 'Button'
 
 export default Button
