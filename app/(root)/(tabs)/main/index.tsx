@@ -12,7 +12,7 @@ const MainHeader = () => (
 		<Button
 			className='bg-bg-200 p-3 rounded-2xl shadow-md'
 			onPress={() => {
-				router.push('/(root)/(tabs)/main/AddFriendModal')
+				router.push('/(root)/(tabs)/main/addFriendModal')
 			}}
 		>
 			<Text className='text-accent-100 text-xl font-roboto-bold'>
@@ -40,17 +40,32 @@ const Main = () => {
 
 					{/* Footer buttons */}
 					<View className='bg-bg-300 w-full flex flex-row items-center justify-between p-2 py-4'>
-						<Button className='bg-primary-100 p-4 rounded-2xl shadow-md'>
+						<Button
+							className='bg-primary-100 p-4 rounded-2xl shadow-md'
+							onPress={() => {
+								router.push('/(root)/(tabs)/main/createSessionModal')
+							}}
+						>
 							<Text className='text-xl font-roboto-bold text-text-100'>
 								+ Комната
 							</Text>
 						</Button>
-						<Button className='bg-primary-200 p-4 rounded-2xl shadow-md'>
+						<Button
+							className='bg-primary-200 p-4 rounded-2xl shadow-md'
+							onPress={() => {
+								router.push('/(root)/(tabs)/main/sessionsSettingsModal')
+							}}
+						>
 							<Text className='text-xl font-roboto-bold text-text-100'>
 								Настройки
 							</Text>
 						</Button>
-						<Button className='bg-primary-200 p-4 rounded-2xl shadow-md'>
+						<Button
+							className='bg-primary-200 p-4 rounded-2xl shadow-md'
+							onPress={() => {
+								router.push('/(root)/(tabs)/main/notificationsModal')
+							}}
+						>
 							<Text className='text-xl font-roboto-bold text-text-100'>
 								Уведомления
 							</Text>

@@ -7,6 +7,12 @@ export default function ProfileLayout() {
 			screenOptions={{
 				headerShown: false,
 			}}
-		/>
+		>
+			<Stack.Screen name='index' />
+			<Stack.Screen name='account' />
+			<Stack.Screen name='notificationsPage' />
+			<Stack.Screen name='privacy' />
+			<Stack.Screen name='settings' />
+		</Stack>
 	)
 }

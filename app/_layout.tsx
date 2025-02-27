@@ -1,4 +1,4 @@
-import { Slot, Stack } from 'expo-router'
+import { Slot } from 'expo-router'
 import '../global.css'
 import { Provider } from 'react-redux'
 import { useFonts } from 'expo-font'

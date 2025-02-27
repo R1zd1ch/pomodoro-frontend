@@ -1,9 +1,9 @@
 import axios from 'axios'
 import { tokenStorage, userStorage } from '../redux/storage'
-import { store } from '../redux/store'
-import { logout, setUser } from '@/redux/authSlice'
 
-const API_URL = process.env.EXPO_PUBLIC_API_URL!
+import { authSlice, setUser } from '@/redux/authSlice'
+
+export const API_URL = process.env.EXPO_PUBLIC_API_URL!
 
 export const api = axios.create({
 	baseURL: API_URL,
@@ -31,6 +31,7 @@ export const refreshToken = async () => {
 		return response.data.accessToken
 	} catch (error) {
 		console.error('Ошибка обновления токена:', error)
+		authSlice.actions.logout()
 		throw new Error('Ошибка обновления токена')
 	}
 }
@@ -47,7 +48,7 @@ api.interceptors.request.use(async config => {
 api.interceptors.response.use(
 	response => response,
 	async error => {
-		if (error.response?.status === 401) {
+		if (error.response?.status === 403 || error.response?.status === 401) {
 			const newAccessToken = await refreshToken()
 			if (newAccessToken) {
 				error.config.headers.Authorization = `Bearer ${newAccessToken}`
@@ -56,7 +57,7 @@ api.interceptors.response.use(
 				await tokenStorage.removeAccessToken()
 				await tokenStorage.removeRefreshToken()
 				await userStorage.removeUser()
-				store.dispatch(logout())
+				authSlice.actions.logout()
 			}
 		}
 		return Promise.reject(error)

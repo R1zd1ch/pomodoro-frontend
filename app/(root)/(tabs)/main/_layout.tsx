@@ -13,7 +13,25 @@ export default function MainLayout() {
 		>
 			<Stack.Screen name='index' />
 			<Stack.Screen
-				name='AddFriendModal'
+				name='addFriendModal'
+				options={{
+					presentation: 'modal',
+				}}
+			/>
+			<Stack.Screen
+				name='notificationsModal'
+				options={{
+					presentation: 'modal',
+				}}
+			/>
+			<Stack.Screen
+				name='createSessionModal'
+				options={{
+					presentation: 'modal',
+				}}
+			/>
+			<Stack.Screen
+				name='sessionsSettingsModal'
 				options={{
 					presentation: 'modal',
 				}}

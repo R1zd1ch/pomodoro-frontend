@@ -2,9 +2,13 @@ import { configureStore } from '@reduxjs/toolkit'
 import { persistStore } from 'redux-persist'
 import { authReducer } from './authSlice'
 import { combineReducers } from 'redux'
+import friendsReducer from './friendsSlice'
+import notificationsReducer from './notificationsSlice'
 
 const rootReducer = combineReducers({
 	auth: authReducer,
+	friends: friendsReducer,
+	notifications: notificationsReducer,
 })
 
 export const store = configureStore({

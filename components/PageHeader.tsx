@@ -3,7 +3,7 @@ import React from 'react'
 import { router } from 'expo-router'
 import Button from './Button'
 
-const ModalHeader = ({ title }: { title: string }) => {
+const PageHeader = ({ title }: { title: string }) => {
 	const isPresented = router.canGoBack()
 
 	return (
@@ -23,4 +23,4 @@ const ModalHeader = ({ title }: { title: string }) => {
 	)
 }
 
-export default ModalHeader
+export default PageHeader

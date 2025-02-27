@@ -1,5 +1,5 @@
 import React, { ReactNode, useEffect } from 'react'
-import { Redirect } from 'expo-router'
+import { useRouter } from 'expo-router'
 import { ActivityIndicator } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useDispatch, useSelector } from 'react-redux'
@@ -14,6 +14,26 @@ interface AuthGuardProps {
 export default function AuthGuard({ children }: AuthGuardProps) {
 	const user = useSelector((state: RootState) => state.auth.user)
 	const dispatch = useDispatch()
+	const router = useRouter()
+
+	useEffect(() => {
+		if (!user) {
+			router.replace('/(auth)/sign-in')
+			return
+		}
+
+		const interval = setInterval(async () => {
+			try {
+				await refreshToken()
+			} catch (error) {
+				clearInterval(interval)
+				dispatch(logout())
+				router.push('/(auth)/sign-in')
+			}
+		}, 10 * 60 * 1000)
+
+		return () => clearInterval(interval)
+	}, [user, dispatch, router])
 
 	if (user === undefined) {
 		return (
@@ -22,23 +42,6 @@ export default function AuthGuard({ children }: AuthGuardProps) {
 			</SafeAreaView>
 		)
 	}
-	useEffect(() => {
-		if (user) {
-			const interval = setInterval(async () => {
-				try {
-					await refreshToken()
-				} catch (error) {
-					dispatch(logout())
-				}
-			}, 10 * 60 * 1000)
-			return () => clearInterval(interval)
-		}
-	}, [user, dispatch])
 
-	if (!user) {
-		return <Redirect href='/(auth)/sign-in' />
-	}
-
-	// Если пользователь авторизован, рендерим защищенное содержимое.
 	return <>{children}</>
 }

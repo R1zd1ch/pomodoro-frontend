@@ -5,6 +5,7 @@ const Button = ({
 	children,
 	onPress,
 	textClassName,
+
 	...props
 }: {
 	className?: string

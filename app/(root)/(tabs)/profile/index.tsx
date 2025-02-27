@@ -10,7 +10,7 @@ import { router } from 'expo-router'
 
 const pages = [
 	{ title: 'Аккаунт', path: '/account', icon: User },
-	{ title: 'Уведомления', path: '/notifications', icon: Bell },
+	{ title: 'Уведомления', path: '/notificationsPage', icon: Bell },
 	{ title: 'Приватность', path: '/privacy', icon: Lock },
 ]
 
@@ -27,7 +27,12 @@ const Profile = () => {
 						<Award size={30} color='#cb80ff' />
 					</Button>
 					<View className='flex-row gap-4'>
-						<Button className='bg-bg-200 rounded-full p-2 shadow-md'>
+						<Button
+							className='bg-bg-200 rounded-full p-2 shadow-md'
+							onPress={() =>
+								router.push('/(root)/(tabs)/profile/addFriendModalCopy')
+							}
+						>
 							<Plus size={30} color='#cb80ff' />
 						</Button>
 						<Button
@@ -60,7 +65,9 @@ const Profile = () => {
 								<Button
 									className='w-full bg-primary-100 bg-gradient-to-br from-primary-300 rounded-[15px] shadow-md'
 									key={path}
-									onPress={() => {}}
+									onPress={() => {
+										router.push(`/(root)/(tabs)/profile/${path}` as never)
+									}}
 								>
 									<View className='flex-row items-center gap-4 p-4'>
 										<Icon size={30} color='#cb80ff' />
